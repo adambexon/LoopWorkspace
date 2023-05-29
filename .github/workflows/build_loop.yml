@@ -29,6 +29,25 @@ jobs:
         with:
           submodules: recursive
       
+      # Customize Loop: Download and apply patches
+      - name: Customize Loop
+        run: |
+
+        # For each patch, edit comment line (keep the #) then update curl (and remove the #)
+
+        # Submodule Loop patches:
+        # Loop: Filename: change default carb absorbtion times to 3,4 and 5 hours
+        #curl https://github.com/adambexon/Loop/commit/fa9530dd227e66e72e28249a4bcf30820315452d.patch | git apply -v --directory=Loop
+
+        # Submodule Loop patches:
+        # LoopKit: Filename: change automatic blousing % up from 40%
+        #curl https://github.com/adambexon/LoopKit/commit/84a8dd3128e4d017e62046079a7b37a5aec34eac.patch | git apply -v --directory=LoopKit
+
+        # Submodule LoopKit patches:
+        # LoopKit: Filename: reduce Glucose target lower limit
+        #curl https://github.com/adambexon/LoopKit/commit/4104d080e8dbbc985b900e4a9d25f4732c1d4fb0.patch | git apply -v --directory=LoopKit
+
+      
       # Patch Fastlane Match to not print tables
       - name: Patch Match Tables
         run: find /usr/local/lib/ruby/gems -name table_printer.rb | xargs sed -i "" "/puts(Terminal::Table.new(params))/d"
